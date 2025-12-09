@@ -18,13 +18,13 @@ public class Main {
             DBConnection dbConnection = new DBConnection();
             DataRetriever dataRetriever = new DataRetriever(dbConnection);
 
-            Runnable printProductHeader = () -> System.out.println("  ID | Nom | Date de création | Catégorie");
+            Runnable printProductHeader = () -> System.out.println("  ID | Name | Creation Date | Category");
 
             System.out.println("==================================================");
-            System.out.println("1. Test : getAllCategories() - Toutes les catégories");
+            System.out.println("1. Test : getAllCategories() - All Categories");
             System.out.println("==================================================");
             List<Category> categories = dataRetriever.getAllCategories();
-            System.out.println("Nombre de catégories : " + categories.size());
+            System.out.println("Number of categories: " + categories.size());
             for (Category c : categories) {
                 System.out.println("  " + c.getId() + " - " + c.getName());
             }
@@ -50,7 +50,7 @@ public class Main {
             productsB4.forEach(p -> System.out.println(p.getId() + " | " + p.getName()  + " | " + p.getCreationDate() + " | " + p.getCategoryName()));
 
             System.out.println("\n==================================================");
-            System.out.println("3. Tests : getProductsByCriteria (SANS pagination)");
+            System.out.println("3. Tests : getProductsByCriteria (WITHOUT pagination)");
             System.out.println("==================================================");
 
             System.out.println("\n--- 3.A : productName=\"Dell\" ---");
@@ -74,10 +74,10 @@ public class Main {
             productsC7.forEach(p -> System.out.println(p.getId() + " | " + p.getName()  + " | " + p.getCreationDate() + " | " + p.getCategoryName()));
 
             System.out.println("\n==================================================");
-            System.out.println("4. Tests : getProductsByCriteria (AVEC pagination)");
+            System.out.println("4. Tests : getProductsByCriteria (WITH pagination)");
             System.out.println("==================================================");
 
-            System.out.println("\n--- 4.A : Tous, page=1, size=10 ---");
+            System.out.println("\n--- 4.A : All, page=1, size=10 ---");
             printProductHeader.run();
             List<Product> productsD1 = dataRetriever.getProductsByCriteria(null, null, null, null, 1, 10);
             productsD1.forEach(p -> System.out.println(p.getId() + " | " + p.getName()  + " | " + p.getCreationDate() + " | " + p.getCategoryName()));
@@ -94,10 +94,10 @@ public class Main {
 
 
         } catch (SQLException e) {
-            System.err.println("\n!!! Erreur SQL : Vérifiez votre connexion à la base de données et les requêtes SQL.");
+            System.err.println("\n!!! SQL Error: Check your database connection and SQL queries.");
             e.printStackTrace();
         } catch (Exception e) {
-            System.err.println("\n!!! Erreur inattendue : Vérifiez l'initialisation de vos objets (DBConnection, DataRetriever, etc.).");
+            System.err.println("\n!!! Unexpected Error: Check the initialization of your objects (DBConnection, DataRetriever, etc.).");
             e.printStackTrace();
         }
     }
