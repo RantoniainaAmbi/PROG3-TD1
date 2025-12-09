@@ -13,9 +13,6 @@ public class DataRetriever {
         this.dbConnection = dbConnection;
     }
 
-    // ---------------------------------------------------------------------
-    // 1. Lire toutes les catégories
-    // ---------------------------------------------------------------------
     public List<Category> getAllCategories() throws SQLException {
         List<Category> categories = new ArrayList<>();
 
@@ -37,9 +34,6 @@ public class DataRetriever {
         return categories;
     }
 
-    // ---------------------------------------------------------------------
-    // 2. Pagination simple (page, size)
-    // ---------------------------------------------------------------------
     public List<Product> getProductList(int page, int size) throws SQLException {
         List<Product> products = new ArrayList<>();
 
@@ -81,9 +75,6 @@ public class DataRetriever {
         return products;
     }
 
-    // ---------------------------------------------------------------------
-    // 3. Recherche multi-critères (sans pagination)
-    // ---------------------------------------------------------------------
     public List<Product> getProductsByCriteria(String productName,
                                                String categoryName,
                                                Instant creationMin,
@@ -123,7 +114,6 @@ public class DataRetriever {
         try (Connection conn = dbConnection.getDBConnection();
              PreparedStatement stmt = conn.prepareStatement(sql.toString())) {
 
-            // Remplissage des paramètres
             for (int i = 0; i < params.size(); i++) {
                 stmt.setObject(i + 1, params.get(i));
             }
@@ -151,9 +141,6 @@ public class DataRetriever {
         return results;
     }
 
-    // ---------------------------------------------------------------------
-    // 4. Recherche multi-critères + pagination combinée
-    // ---------------------------------------------------------------------
     public List<Product> getProductsByCriteria(String productName,
                                                String categoryName,
                                                Instant creationMin,
@@ -161,7 +148,6 @@ public class DataRetriever {
                                                int page,
                                                int size) throws SQLException {
 
-        // D'abord filtrer
         List<Product> filtered = getProductsByCriteria(
                 productName,
                 categoryName,
@@ -169,7 +155,6 @@ public class DataRetriever {
                 creationMax
         );
 
-        // Ensuite paginer (et non l’inverse)
         int start = (page - 1) * size;
         int end = Math.min(start + size, filtered.size());
 
