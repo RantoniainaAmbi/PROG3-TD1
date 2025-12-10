@@ -6,9 +6,9 @@ public class Product {
     private int id;
     private String name;
     private Instant creationDateTime;
-    private String category;
+    private Category category;
 
-    public Product(int id, String name, Instant creationDateTime, String category) {
+    public Product(int id, String name, Instant creationDateTime, Category category) {
         this.id = id;
         this.name = name;
         this.creationDateTime = creationDateTime;
@@ -16,7 +16,7 @@ public class Product {
     }
 
     public String getCategoryName(){
-        return category;
+        return category.getName();
     }
 
     public int getId() {

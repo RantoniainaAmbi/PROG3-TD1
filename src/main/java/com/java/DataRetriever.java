@@ -65,7 +65,7 @@ public class DataRetriever {
                         rs.getInt("id"),
                         rs.getString("name"),
                         rs.getTimestamp("creation_datetime").toInstant(),
-                        category.toString()
+                        category
                 );
 
                 products.add(product);
@@ -131,7 +131,7 @@ public class DataRetriever {
                         rs.getInt("id"),
                         rs.getString("name"),
                         rs.getTimestamp("creation_datetime").toInstant(),
-                        category.toString()
+                        category
                 );
 
                 results.add(product);

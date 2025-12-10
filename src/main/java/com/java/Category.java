@@ -13,7 +13,7 @@ public class Category {
         return id;
     }
 
-    public String getName() {
+    public  String getName() {
         return name;
     }
 }
